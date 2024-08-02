@@ -1,4 +1,4 @@
-# Codam Web Greeter
+# codam-web-greeter
 A greeter theme for [nody-greeter](https://github.com/JezerM/nody-greeter)/web-greeter in LightDM, made specifically for [Codam Coding College](https://codam.nl/en).
 
 ---
@@ -14,7 +14,8 @@ A greeter theme for [nody-greeter](https://github.com/JezerM/nody-greeter)/web-g
 - Display user's profile picture (from `~/.face`) on the lock screen
 - Display user's Gnome wallpaper on the lock screen
 - Keybinding to gracefully reboot the computer (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Del</kbd>)
-- Display 🖧 network status on-screen without having to log in
+- Display network status on-screen without having to log in
+- Custom screensaver support (HTML5 canvas)
 
 
 ## Screenshots
@@ -24,20 +25,16 @@ A greeter theme for [nody-greeter](https://github.com/JezerM/nody-greeter)/web-g
 
 ## Installation
 
-> Caution: make sure you know how to restore your system if something goes wrong. This theme is made specifically for Codam and if it doesn't work elsewhere, you're on your own.
+> Caution: make sure you know how to restore your system if something goes wrong. This theme is made specifically for Codam and might not always work as intended in other 42 schools, let alone different environments. For 42 schools, it is recommended to install this theme using the [provided Ansible role](https://github.com/codam-coding-college/ansible-codam-web-greeter) on ansiblecluster.
 
 1. Install dependencies:
 ```bash
 sudo apt install lightdm light-locker xprintidle
 ```
 
-2. Install *nody-greeter*:
-```bash
-sudo apt install nody-greeter=1.5.2
-```
-Alternatively, you can install it by compiling from source from the [nody-greeter repository](https://github.com/codam-coding-college/nody-greeter). Don't forget to clone the repository with the `--recursive` flag to include the submodules.
+2. Install *nody-greeter* by downloading the deb from the [nody-greeter repository releases page](https://github.com/codam-coding-college/nody-greeter/releases). If you're at a 42 school, it is recommended to add this deb to your Nexus server so you can easily install it using `apt` later. Alternatively, you can install it by compiling from source (don't forget to clone the repository with the `--recursive` flag to include its submodules).
 
-3. Download the latest stable release of the greeter theme from the [releases page](https://github.com/codam-coding-college/nody-greeter/releases):
+4. Download the latest stable release of the greeter theme from the [releases page](https://github.com/codam-coding-college/codam-web-greeter/releases):
 ```bash
 wget https://github.com/codam-coding-college/codam-web-greeter/releases/latest/download/codam-web-greeter.zip
 unzip codam-web-greeter.zip
@@ -158,6 +155,8 @@ This is a known issue with LightDM. To fix it, add the following line to */etc/l
 display-setup-script=/usr/bin/xset s off
 ```
 Alternatively, `/usr/bin/xset s off` can be added to the greeter setup hook defined in */etc/lightdm/lightdm.conf*.
+
+You might also have to disable the screensaver in the web-greeter settings in */etc/lightdm/web-greeter.yml*.
 
 ### The screen blanks on the lock screen
 Best solution: use `dm-tool switch-to-greeter` instead of `dm-tool lock` to lock the screen.
